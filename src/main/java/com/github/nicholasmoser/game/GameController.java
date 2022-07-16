@@ -16,6 +16,7 @@ public class GameController {
 
   public FlowPane flow;
   public Label info;
+  private Path currDir;
 
   private Set<Path> completedPaths = new HashSet<>();
 
@@ -25,6 +26,7 @@ public class GameController {
   }
 
   public void cd(Path dir) throws IOException {
+    this.currDir = dir;
     info.setText(dir.toString());
     flow.getChildren().clear();
     flow.getChildren().add(getExit(dir));
@@ -53,6 +55,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
+    button.setOnMouseExited(e -> info.setText(currDir.toString()));
     Path parent = path.getParent();
     if (parent != null && Files.isReadable(parent)) {
       button.setOnAction(action -> {
@@ -75,6 +78,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
+    button.setOnMouseExited(e -> info.setText(currDir.toString()));
     button.setOnAction(action -> {
       try {
         cd(path);
@@ -92,6 +96,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
+    button.setOnMouseExited(e -> info.setText(currDir.toString()));
     button.setDisable(true);
     return button;
   }
@@ -103,6 +108,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
+    button.setOnMouseExited(e -> info.setText(currDir.toString()));
     if (completedPaths.contains(path)) {
       button.setDisable(true);
     } else {
