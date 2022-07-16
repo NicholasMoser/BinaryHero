@@ -56,6 +56,7 @@ public class BinaryHero extends Application {
     primaryStage.setTitle("Binary Hero");
     primaryStage.setScene(scene);
     primaryStage.centerOnScreen();
+    primaryStage.setResizable(false);
     primaryStage.show();
   }
 
