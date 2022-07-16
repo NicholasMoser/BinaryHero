@@ -2,9 +2,11 @@ package com.github.nicholasmoser;
 
 import com.github.nicholasmoser.game.GameController;
 import com.github.nicholasmoser.gui.GUIUtils;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -113,6 +115,11 @@ public class BinaryHero extends Application {
   }
 
   private void help() {
+    try {
+      Desktop.getDesktop().browse(new URI("https://github.com/NicholasMoser/BinaryHero#binaryhero"));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   /**
