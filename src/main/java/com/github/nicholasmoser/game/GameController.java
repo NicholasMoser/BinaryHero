@@ -25,6 +25,7 @@ public class GameController {
   private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
   public FlowPane flow;
   public Label info;
+  public Label characterStatus;
   private State state;
 
   public void init(Path dir) throws IOException {
@@ -34,6 +35,7 @@ public class GameController {
   }
 
   public void cd(Path dir) throws IOException {
+    updateCharacterStatus();
     state.setCurrentDirectory(dir);
     info.setText(dir.toString());
     flow.getChildren().clear();
@@ -68,6 +70,14 @@ public class GameController {
         Message.error("Failed to Load Directory", e.getMessage());
       }
     }
+  }
+
+  private void updateCharacterStatus() {
+    int currHealth = state.getCurrHealth();
+    int totalHealth = state.getTotalHealth();
+    int power = state.getPower();
+    String status = String.format("Health: %d / %d Power: %d", currHealth, totalHealth, power);
+    characterStatus.setText(status);
   }
 
   private void handlePath(Path path) {

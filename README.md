@@ -14,7 +14,8 @@ generate a unique level based on the music track.
 
 Many file types are recognized by Binary Hero, and the characteristics of the possible encounters
 will be tailored to the characteristics of the file. For example, particularly large image
-files will yield harder encounters with greater prizes.
+files will yield harder encounters with greater prizes. Every player of this game should
+have an experience unique to their computer!
 
 ## Resources
 

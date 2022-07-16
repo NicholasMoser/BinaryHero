@@ -33,36 +33,24 @@
 -->
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.nicholasmoser.game.GameController">
-  <children>
-      <HBox prefHeight="0.0">
+<VBox prefHeight="600.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.nicholasmoser.game.EncounterController">
+   <children>
+      <HBox fx:id="top">
          <children>
-            <Label fx:id="characterStatus" text="Character Status">
+            <Label text="Character Status">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-         </children>
-      </HBox>
-      <ScrollPane prefHeight="781.0" prefWidth="1024.0">
-         <content>
-            <FlowPane fx:id="flow" prefHeight="758.0" prefWidth="1024.0" />
-         </content>
-      </ScrollPane>
-      <HBox>
-         <children>
-            <Label fx:id="info" text="File Path">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-  </children>
+         </children></HBox>
+      <ListView fx:id="events" prefHeight="350.0" prefWidth="824.0" />
+      <HBox fx:id="actionBar" prefHeight="50.0" prefWidth="200.0" />
+      <HBox prefHeight="50.0" prefWidth="200.0" />
+      <HBox layoutX="10.0" layoutY="560.0" prefHeight="50.0" prefWidth="200.0" />
+   </children>
 </VBox>
