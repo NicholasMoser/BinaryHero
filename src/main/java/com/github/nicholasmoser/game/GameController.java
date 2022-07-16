@@ -16,17 +16,16 @@ public class GameController {
 
   public FlowPane flow;
   public Label info;
-  private Path currDir;
-
-  private Set<Path> completedPaths = new HashSet<>();
+  private State state;
 
   public void init(Path dir) throws IOException {
+    state = new State(dir);
     flow.setPrefWrapLength(1024);
     cd(dir);
   }
 
   public void cd(Path dir) throws IOException {
-    this.currDir = dir;
+    state.setCurrentDirectory(dir);
     info.setText(dir.toString());
     flow.getChildren().clear();
     flow.getChildren().add(getExit(dir));
@@ -45,7 +44,6 @@ public class GameController {
         }
       }
     });
-
   }
 
   private Node getExit(Path path) {
@@ -55,7 +53,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
-    button.setOnMouseExited(e -> info.setText(currDir.toString()));
+    button.setOnMouseExited(e -> info.setText(state.getCurrentDirectory().toString()));
     Path parent = path.getParent();
     if (parent != null && Files.isReadable(parent)) {
       button.setOnAction(action -> {
@@ -78,7 +76,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
-    button.setOnMouseExited(e -> info.setText(currDir.toString()));
+    button.setOnMouseExited(e -> info.setText(state.getCurrentDirectory().toString()));
     button.setOnAction(action -> {
       try {
         cd(path);
@@ -96,7 +94,7 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
-    button.setOnMouseExited(e -> info.setText(currDir.toString()));
+    button.setOnMouseExited(e -> info.setText(state.getCurrentDirectory().toString()));
     button.setDisable(true);
     return button;
   }
@@ -108,12 +106,12 @@ public class GameController {
     view.setFitWidth(128);
     button.setGraphic(view);
     button.setOnMouseEntered(e -> info.setText(path.toString()));
-    button.setOnMouseExited(e -> info.setText(currDir.toString()));
-    if (completedPaths.contains(path)) {
+    button.setOnMouseExited(e -> info.setText(state.getCurrentDirectory().toString()));
+    if (state.hasCompleted(path)) {
       button.setDisable(true);
     } else {
       button.setOnAction(action -> {
-            completedPaths.add(path);
+            state.addCompleted(path);
             button.setDisable(true);
           }
       );
