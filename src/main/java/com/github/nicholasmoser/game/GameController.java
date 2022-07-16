@@ -1,19 +1,28 @@
 package com.github.nicholasmoser.game;
 
+import com.github.nicholasmoser.Message;
 import com.github.nicholasmoser.gui.GUIUtils;
+import com.google.common.base.Stopwatch;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 
 public class GameController {
 
+  private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
   public FlowPane flow;
   public Label info;
   private State state;
@@ -29,21 +38,57 @@ public class GameController {
     info.setText(dir.toString());
     flow.getChildren().clear();
     flow.getChildren().add(getExit(dir));
-    Files.list(dir).forEach(path -> {
-      if (Files.isDirectory(path)) {
-        if (Files.isReadable(path)) {
-          flow.getChildren().add(getDoor(path));
-        } else {
-          flow.getChildren().add(getLockedDoor(path));
+
+    if (isLargeDirectory(dir)) {
+      // If the directory is large (takes more than 1 second), create a loading window
+      Task<Void> task = new Task<>() {
+        @Override
+        public Void call() throws Exception {
+          Files.list(dir).forEach(path -> {
+            updateMessage(path.toString());
+            handlePath(path);
+          });
+          return null;
         }
-      } else {
-        if (Files.isReadable(path)) {
-          flow.getChildren().add(getChest(path));
-        } else {
-          flow.getChildren().add(getLockedDoor(path));
-        }
+      };
+      Stage loading = GUIUtils.createLoadingWindow("Loading Directory", task);
+      task.setOnSucceeded(event -> loading.close());
+      task.setOnFailed(event -> {
+        LOGGER.log(Level.SEVERE, "Failed to Load Directory", task.getException());
+        Message.error("Failed to Load Directory", task.getException().getMessage());
+        loading.close();
+      });
+      new Thread(task).start();
+    } else {
+      // Directory is small, process as-is
+      try {
+        Files.list(dir).forEach(this::handlePath);
+      } catch (Exception e) {
+        LOGGER.log(Level.SEVERE, "Failed to Load Directory", e);
+        Message.error("Failed to Load Directory", e.getMessage());
       }
-    });
+    }
+  }
+
+  private void handlePath(Path path) {
+    if (Files.isDirectory(path)) {
+      if (Files.isReadable(path)) {
+        Platform.runLater(() -> flow.getChildren().add(getDoor(path)));
+      } else {
+        Platform.runLater(() -> flow.getChildren().add(getLockedDoor(path)));
+      }
+    } else {
+      if (Files.isReadable(path)) {
+        Platform.runLater(() -> flow.getChildren().add(getChest(path)));
+      } else {
+        Platform.runLater(() -> flow.getChildren().add(getLockedDoor(path)));
+      }
+    }
+  }
+
+  private boolean isLargeDirectory(Path dir) throws IOException {
+    int size = Files.list(dir).collect(Collectors.toList()).size();
+    return size > 100;
   }
 
   private Node getExit(Path path) {

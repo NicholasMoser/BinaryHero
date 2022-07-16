@@ -5,12 +5,14 @@ import java.util.HashSet;
 
 public class State {
 
-  private Path currentDirectory;
   private final HashSet<Path> completedPaths;
+  private Path currentDirectory;
   private int health;
+  private int power;
 
   public State(Path currentDirectory) {
     this.health = 100;
+    this.power = 100;
     this.currentDirectory = currentDirectory;
     this.completedPaths = new HashSet<>();
   }

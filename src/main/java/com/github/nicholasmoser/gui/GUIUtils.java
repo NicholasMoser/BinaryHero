@@ -103,6 +103,43 @@ public class GUIUtils {
   }
 
   /**
+   * Creates a new loading window with the given size.
+   *
+   * @param title The title of the window.
+   * @param width The width of the window.
+   * @param height The height of the window.
+   * @return The loading window.
+   */
+  public static Stage createLoadingWindow(String title, double width, double height) {
+    Stage loadingWindow = new Stage();
+    loadingWindow.initModality(Modality.APPLICATION_MODAL);
+    loadingWindow.initStyle(StageStyle.UNDECORATED);
+    loadingWindow.setTitle(title);
+    GUIUtils.setIcons(loadingWindow);
+
+    GridPane flow = new GridPane();
+    flow.setAlignment(Pos.CENTER);
+    flow.setVgap(20);
+
+    Text text = new Text();
+    text.setStyle(FONT_SIZE_CSS);
+
+    ProgressIndicator progressIndicator = new ProgressIndicator(-1.0f);
+
+    GridPane.setHalignment(text, HPos.CENTER);
+    GridPane.setHalignment(progressIndicator, HPos.CENTER);
+    flow.add(text, 0, 0);
+    flow.add(progressIndicator, 0, 1);
+    flow.setStyle(BORDER);
+
+    Scene dialogScene = new Scene(flow, width, height);
+    loadingWindow.setScene(dialogScene);
+    loadingWindow.show();
+
+    return loadingWindow;
+  }
+
+  /**
    * Sets the application icons on the stage.
    * 
    * @param primaryStage The primary stage to set the icons for.
