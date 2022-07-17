@@ -36,17 +36,17 @@ The idea of the game is that there are many paths in your file system you can ex
 also create their own groups of files to create unique repeatable dungeons that others can play.
 New file type support and more advanced RPG mechanics would be added over time.
 
-I didn't have time to analyze each binary file individually, although the code of the game does
-have the ability to look at the binary structure of files using [Kaitai](https://kaitai.io/).
-Had I more time, I would tailor each encounter to attributes of the files themselves, such as
-image size or video quality. As of now, the encounter type is determined by a
-[CRC32 hash](https://en.wikipedia.org/wiki/Cyclic_redundancy_check).
+The code of the game currently does have the ability to look at the binary structure of certain
+files using [Kaitai](https://kaitai.io/). Had I more time, I would tailor each encounter to the
+attributes of the files themselves, such as image size or video quality. As of now, the encounter
+characteristics is determined by a [CRC32 hash](https://en.wikipedia.org/wiki/Cyclic_redundancy_check).
 
 ## Ideas
 
-- Maybe randomize the order of the icons and don't show the file. That way there is randomness
-  to selecting the next encounter?
-- Use gold for something?
+- Maybe randomize the order of the icons and don't show the file name. That way there is randomness
+  to selecting the next encounter
+- Use gold for something
+- Save game
 
 ## Attribution
 
