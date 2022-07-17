@@ -1,35 +1,46 @@
 # Binary Hero
 
-Go on an adventure in your computer's file system!
+Go on an adventure in your computer's file system! This game is a submission for the
+[GMTK Game Jam 2022](https://itch.io/jam/gmtk-jam-2022).
 
 ## What is this game?
 
 In this game you navigate through your computer's file system and encounter items and
-battles based on the files you encounter. Each file has a unique set of encounters it may
-yield, ultimately decided by a dice roll. This game is heavily inspired by
-[Sonic 3 & Knuckles Lock-On Technology](https://segaretro.org/Lock-On_Technology), which
-let you plug in any Sega Genesis game and get a unique [Blue Sphere](https://sonic.fandom.com/wiki/Blue_Sphere)
+battles based on the files you encounter. Every file has a unique encounter defined for it.
+This game is heavily inspired by
+[Sonic 3 & Knuckles Lock-On Technology](https://segaretro.org/Lock-On_Technology),
+which let you plug in any Sega Genesis game and get a unique
+[Blue Sphere](https://sonic.fandom.com/wiki/Blue_Sphere)
 stage. It was further inspired by games like [AudioSurf](https://www.audio-surf.com/) which
 generate a unique level based on the music track.
 
-The main objective is to become as strong as possible and accumulate as much gold as possible.
-
-Doors are folders that lead to new encounters. Locked doors are files and folders that are
-inaccessible by the game. Papyrus is a non-combat scenario. Swords are combat.
-
-Many file types are recognized by Binary Hero, and the characteristics of the possible encounters
-will be tailored to the characteristics of the file. For example, particularly large image
-files will yield harder encounters with greater prizes. Every player of this game should
-have an experience unique to their computer!
+![Example 1](/docs/example1.png?raw=true "Example 1")
 
 ## How to Play
 
-The idea of the game is that there are many paths in your file system you can explore. Users may
-also create their own groups of files to create unique repeatable dungeons that others can play.
-New file types and more advanced RPG mechanics would be added over time.
+Simply use your mouse or keyboard to interact with the icons to explore.
+
+The main objective is to become as strong as possible and accumulate as much gold as possible.
+Doors are folders that lead to new encounters. Locked doors are files and folders that are
+inaccessible by the game. Papyrus is a non-combat scenario. Swords are combat. Potions are items.
+Question marks are random encounters.
 
 The end-game can be found in your Windows folder (e.g. C:/Windows). Encounters in this folder
-will be **much** harder and harsher.
+will be **much** harder but with higher rewards.
+
+![Example 2](/docs/example2.png?raw=true "Example 2")
+
+## Other Thoughts
+
+The idea of the game is that there are many paths in your file system you can explore. Users may
+also create their own groups of files to create unique repeatable dungeons that others can play.
+New file type support and more advanced RPG mechanics would be added over time.
+
+I didn't have time to analyze each binary file individually, although the code of the game does
+have the ability to look at the binary structure of files using [Kaitai](https://kaitai.io/).
+Had I more time, I would tailor each encounter to attributes of the files themselves, such as
+image size or video quality. As of now, the encounter type is determined by a
+[CRC32 hash](https://en.wikipedia.org/wiki/Cyclic_redundancy_check).
 
 ## Ideas
 
