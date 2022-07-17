@@ -88,6 +88,6 @@ public class KaitaiUtil {
     for (Section section : bin.pe().sections()) {
 
     }
-    return new ItemEncounter(Item.POTION);
+    return new ItemEncounter(Item.POTION, 5);
   }
 }

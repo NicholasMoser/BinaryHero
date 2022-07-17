@@ -42,15 +42,14 @@
    <children>
       <HBox fx:id="top">
          <children>
-            <Label text="Character Status">
+            <Label fx:id="characterStatus" text="Character Status">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </children></HBox>
-      <ListView fx:id="events" prefHeight="350.0" prefWidth="824.0" />
+      <HBox fx:id="icons" prefHeight="64.0" prefWidth="200.0" />
+      <ListView fx:id="events" prefHeight="450.0" prefWidth="824.0" />
       <HBox fx:id="actionBar" prefHeight="50.0" prefWidth="200.0" />
-      <HBox prefHeight="50.0" prefWidth="200.0" />
-      <HBox layoutX="10.0" layoutY="560.0" prefHeight="50.0" prefWidth="200.0" />
    </children>
 </VBox>

@@ -10,6 +10,7 @@ module com.github.nicholasmoser {
   requires javafx.controls;
   requires javafx.fxml;
   requires javafx.graphics;
+  requires javafx.media;
   requires java.logging;
   requires kaitai.struct.runtime;
 }

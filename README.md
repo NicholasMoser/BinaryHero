@@ -54,3 +54,5 @@ Icons and graphics created by **Freepik**.
   - [Nerf](https://www.flaticon.com/premium-icon/nerf_2790400)
 - CC0-1.0, MIT, BSD-3-Clause-Attribution
   - [Kaitai Struct Formats](https://github.com/kaitai-io/kaitai_struct_formats)
+- CC0 License
+  - [Boardgame Pack](https://www.kenney.nl/assets/boardgame-pack)

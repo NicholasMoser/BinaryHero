@@ -1,6 +1,7 @@
 package com.github.nicholasmoser.gui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +25,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * GUI utilities.
@@ -35,11 +38,16 @@ public class GUIUtils {
 
   public static final String BORDER = "-fx-effect: innershadow(gaussian, #039ed3, 2, 1.0, 0, 0);";
 
-  private static final Image PIECE_RED = new Image(GUIUtils.class.getResourceAsStream("boardgamepack/PNG/Pieces (Red)/pieceRed_single02.png"));
-
   private static final Path DARK_MODE_DISABLED = Paths.get("DARK_MODE_DISABLED");
 
   private static final Map<String, Image> imageCache = new HashMap<>();
+
+  public static void playRollSound() {
+    URL url = GUIUtils.class.getResource("boardgamepack/Bonus/dieThrow1.wav");
+    Media sound = new Media(url.toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(sound);
+    mediaPlayer.play();
+  }
 
   public static Image getImage(String path) {
     Image image = imageCache.get(path);
@@ -48,6 +56,10 @@ public class GUIUtils {
       imageCache.put(path, image);
     }
     return image;
+  }
+
+  public static Image getRollImage(int roll) {
+    return getImage(String.format("boardgamepack/PNG/Dice/dieWhite%d.png", roll));
   }
 
   /**
@@ -146,7 +158,7 @@ public class GUIUtils {
    */
   public static void setIcons(Stage primaryStage) {
     ObservableList<Image> icons = primaryStage.getIcons();
-    icons.add(PIECE_RED);
+    icons.add(getImage("boardgamepack/PNG/Pieces (Red)/pieceRed_single02.png"));
   }
 
   /**
@@ -157,7 +169,7 @@ public class GUIUtils {
   public static void setIcons(Alert alert) {
     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
     ObservableList<Image> icons = stage.getIcons();
-    icons.add(PIECE_RED);
+    icons.add(getImage("boardgamepack/PNG/Pieces (Red)/pieceRed_single02.png"));
   }
 
   public static void initDarkMode(Scene scene) {

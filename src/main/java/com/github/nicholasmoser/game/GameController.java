@@ -12,20 +12,14 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class GameController {
 
@@ -201,20 +195,16 @@ public class GameController {
     Encounter encounter = KaitaiUtil.readFile(path);
     encounter.setState(state);
     Stage stage = new Stage();
-    try {
-      FXMLLoader loader = new FXMLLoader(GameController.class.getResource("encounter.fxml"));
-      Scene scene = new Scene(loader.load());
-      GUIUtils.initDarkMode(scene);
-      EncounterController controller = loader.getController();
-      controller.init(state, encounter);
-      GUIUtils.setIcons(stage);
-      stage.initModality(Modality.APPLICATION_MODAL);
-      stage.setScene(scene);
-      stage.setTitle("Encounter");
-      stage.centerOnScreen();
-      stage.show();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    FXMLLoader loader = new FXMLLoader(GameController.class.getResource("encounter.fxml"));
+    Scene scene = new Scene(loader.load());
+    GUIUtils.initDarkMode(scene);
+    EncounterController controller = loader.getController();
+    controller.init(state, encounter);
+    GUIUtils.setIcons(stage);
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setScene(scene);
+    stage.setTitle("Encounter");
+    stage.centerOnScreen();
+    stage.show();
   }
 }
