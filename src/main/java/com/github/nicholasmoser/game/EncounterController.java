@@ -31,6 +31,11 @@ public class EncounterController {
     view.setFitHeight(64);
     view.setFitWidth(64);
     icons.getChildren().add(view);
+    Image encounterImage = encounter.getImage();
+    ImageView encounterImageView = new ImageView(encounterImage);
+    encounterImageView.setFitHeight(64);
+    encounterImageView.setFitWidth(64);
+    icons.getChildren().add(encounterImageView);
     events.getItems().addAll(encounter.getEntryMessages(roll));
     events.setStyle(EVENT_FONT_SIZE);
     actionBar.getChildren().addAll(encounter.getActions(events));
