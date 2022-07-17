@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Locale;
 
-// Make any files in C:\Windows 50x harder
 public class KaitaiUtil {
 
   public static Encounter readFile(Path filePath) throws IOException {
@@ -96,8 +95,12 @@ public class KaitaiUtil {
       //case "mkv" -> System.out.println("mkv");
 
       // Other - Random
-      case "ttf" -> System.out.println("ttf"); // font/ttf.ksy
-      case "res" -> System.out.println("res"); // windows/windows_resource_file.ksy
+      case "ttf" -> {
+        return random(filePath); // font/ttf.ksy
+      }
+      case "res" -> {
+        return random(filePath); // windows/windows_resource_file.ksy
+      }
       //case "torrent" -> System.out.println("torrent");
       //case "iso" -> System.out.println("iso");
       //case "mui" -> System.out.println("mui");
@@ -106,9 +109,37 @@ public class KaitaiUtil {
       //case "manifest" -> System.out.println("manifest");
       //case "meta" -> System.out.println("meta");
       //case "wem" -> System.out.println("wem");
-      default -> System.out.println("binary");
+      default -> {
+        return random(filePath);
+      }
     }
-    return null;
+  }
+
+  private static Encounter random(Path filePath) throws IOException {
+    int hash = CRC32.getHash(filePath);
+    if (hash % 11 == 0) {
+      return new ScenarioEncounter(Scenario.NOTHING, isEndGame(filePath));
+    } else if (hash % 11 == 1) {
+      return new ScenarioEncounter(Scenario.INJURY, isEndGame(filePath));
+    } else if (hash % 11 == 2) {
+      return new ScenarioEncounter(Scenario.TRAINING, isEndGame(filePath));
+    } else if (hash % 11 == 3) {
+      return new EnemyEncounter(Enemy.SLIME, isEndGame(filePath));
+    } else if (hash % 11 == 4) {
+      return new EnemyEncounter(Enemy.SKELETON, isEndGame(filePath));
+    } else if (hash % 11 == 5) {
+      return new EnemyEncounter(Enemy.KNIGHT, isEndGame(filePath));
+    } else if (hash % 11 == 6) {
+      return new EnemyEncounter(Enemy.DRAGON, isEndGame(filePath));
+    } else if (hash % 11 == 7) {
+      return new ItemEncounter(Item.POTION, isEndGame(filePath));
+    } else if (hash % 11 == 8) {
+      return new ItemEncounter(Item.POISON, isEndGame(filePath));
+    } else if (hash % 11 == 9) {
+      return new ItemEncounter(Item.BIGGER_SWORD, isEndGame(filePath));
+    } else {
+      return new ItemEncounter(Item.SWORD_BREAKS, isEndGame(filePath));
+    }
   }
 
   private static Encounter scenario(Path filePath) throws IOException {
