@@ -17,7 +17,18 @@ will be tailored to the characteristics of the file. For example, particularly l
 files will yield harder encounters with greater prizes. Every player of this game should
 have an experience unique to their computer!
 
-## Resources
+## How to Play
+
+The idea of the game is that there are many paths in your file system you can explore. Users may
+also create their own groups of files to create unique repeatable dungeons that others can play.
+New file types and more advanced RPG mechanics would be added over time.
+
+## Ideas
+
+- Maybe randomize the order of the icons and don't show the file. That way there is randomness
+  to selecting the next encounter?
+
+## Attribution
 
 Icons and graphics created by **Freepik**.
 
@@ -32,3 +43,8 @@ Icons and graphics created by **Freepik**.
   - [Game Over](https://www.flaticon.com/premium-icon/game-over_2790415)
   - [Final Boss](https://www.flaticon.com/premium-icon/final-boss_2790435)
   - [Buff](https://www.flaticon.com/premium-icon/buff_2790394)
+  - [Item](https://www.flaticon.com/premium-icon/potion_2790362)
+  - [Buff](https://www.flaticon.com/premium-icon/buff_2790394)
+  - [Nerf](https://www.flaticon.com/premium-icon/nerf_2790400)
+- CC0-1.0, MIT, BSD-3-Clause-Attribution
+  - [Kaitai Struct Formats](https://github.com/kaitai-io/kaitai_struct_formats)

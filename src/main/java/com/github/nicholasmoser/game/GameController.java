@@ -2,15 +2,12 @@ package com.github.nicholasmoser.game;
 
 import com.github.nicholasmoser.Message;
 import com.github.nicholasmoser.gui.GUIUtils;
-import com.google.common.base.Stopwatch;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
@@ -89,7 +86,7 @@ public class GameController {
       }
     } else {
       if (Files.isReadable(path)) {
-        Platform.runLater(() -> flow.getChildren().add(getChest(path)));
+        Platform.runLater(() -> flow.getChildren().add(getFileImage(path)));
       } else {
         Platform.runLater(() -> flow.getChildren().add(getLockedDoor(path)));
       }
@@ -97,8 +94,7 @@ public class GameController {
   }
 
   private boolean isLargeDirectory(Path dir) throws IOException {
-    int size = Files.list(dir).collect(Collectors.toList()).size();
-    return size > 100;
+    return Files.list(dir).count() > 100;
   }
 
   private Node getExit(Path path) {
@@ -154,9 +150,20 @@ public class GameController {
     return button;
   }
 
-  private Button getChest(Path path) {
+  public Button getFileImage(Path path) {
+    String extension = com.google.common.io.Files.getFileExtension(path.toString()).toLowerCase(
+        Locale.ROOT);
+    String image;
+    switch(extension) {
+      case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore", "properties",
+          "settings", "config", "conf", "lua", "go", "c++", "java", "bat", "sh", "ps1", "php",
+          "c", "js", "h", "cs", "py", "cpp", "css" -> image = "papyrus.png";
+      case "class", "exe", "dll", "sys" -> image = "item.png";
+      case "bmp", "gif", "ico", "png", "jpg", "jpeg", "mid", "midi", "smf", "ogg", "avi" -> image = "swords.png";
+      default -> image = "question_mark.png";
+    }
     Button button = new Button();
-    ImageView view = new ImageView(GUIUtils.getImage("chest.png"));
+    ImageView view = new ImageView(GUIUtils.getImage(image));
     view.setFitHeight(128);
     view.setFitWidth(128);
     button.setGraphic(view);
@@ -166,6 +173,7 @@ public class GameController {
       button.setDisable(true);
     } else {
       button.setOnAction(action -> {
+            //KaitaiUtil.readFile(path);
             state.addCompleted(path);
             button.setDisable(true);
           }

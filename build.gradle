@@ -10,6 +10,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.12'
     id 'org.beryx.jlink' version '2.24.4'
     id 'net.researchgate.release' version '2.8.1'
+    id 'name.valery1707.kaitai' version '0.1.2'
 }
 
 repositories {
@@ -22,6 +23,7 @@ dependencies {
     implementation 'org.openjfx:javafx-graphics:18.0.1'
     implementation 'org.openjfx:javafx-base:18.0.1'
     implementation 'org.openjfx:javafx-fxml:18.0.1'
+    implementation 'io.kaitai:kaitai-struct-runtime:0.9'
     testImplementation(platform('org.junit:junit-bom:5.8.2'))
     testImplementation('org.junit.jupiter:junit-jupiter')
 }
@@ -33,6 +35,11 @@ sourceCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+kaitai {
+    packageName = 'com.github.nicholasmoser.kaitai'
+    url = new URL('https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.9/kaitai-struct-compiler-0.9.zip')
 }
 
 test {

@@ -11,4 +11,5 @@ module com.github.nicholasmoser {
   requires javafx.fxml;
   requires javafx.graphics;
   requires java.logging;
+  requires kaitai.struct.runtime;
 }
