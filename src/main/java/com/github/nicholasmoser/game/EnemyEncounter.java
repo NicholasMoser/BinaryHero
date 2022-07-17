@@ -87,7 +87,7 @@ public class EnemyEncounter implements Encounter {
       // 3 -> 2/5 enemy power
       // 4 -> 3/5 enemy power
       // 5 -> 4/5 enemy power
-      int damage = enemyPower - (((roll - 1) / 5) * enemyPower);
+      int damage = enemyPower - (int)(((roll - 1f) / 5) * enemyPower);
       if (playerPower > enemyPower) {
         damage = damage / 2;
       }
