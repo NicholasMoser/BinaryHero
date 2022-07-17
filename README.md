@@ -12,8 +12,10 @@ let you plug in any Sega Genesis game and get a unique [Blue Sphere](https://son
 stage. It was further inspired by games like [AudioSurf](https://www.audio-surf.com/) which
 generate a unique level based on the music track.
 
+The main objective is to become as strong as possible and accumulate as much gold as possible.
+
 Doors are folders that lead to new encounters. Locked doors are files and folders that are
-inaccessible by the game.
+inaccessible by the game. Papyrus is a non-combat scenario. Swords are combat.
 
 Many file types are recognized by Binary Hero, and the characteristics of the possible encounters
 will be tailored to the characteristics of the file. For example, particularly large image
@@ -33,6 +35,7 @@ will be **much** harder and harsher.
 
 - Maybe randomize the order of the icons and don't show the file. That way there is randomness
   to selecting the next encounter?
+- Use gold for something?
 
 ## Attribution
 

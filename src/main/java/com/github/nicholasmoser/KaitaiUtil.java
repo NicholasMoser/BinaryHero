@@ -59,23 +59,39 @@ public class KaitaiUtil {
       //case "doc" -> System.out.println("doc");
 
       // Image - Combat
-      case "bmp" -> System.out.println("bmp"); // image/bmp.ksy
-      case "gif" -> System.out.println("gif"); // image/gif.ksy
-      case "ico" -> System.out.println("gif"); // image/ico.ksy
-      case "png" -> System.out.println("png"); // image/png.ksy
-      case "jpg", "jpeg" -> System.out.println("jpeg"); // image/jpeg.ksy
+      case "bmp" -> {
+        return enemy(filePath); // image/bmp.ksy
+      }
+      case "gif" -> {
+        return enemy(filePath); // image/gif.ksy
+      }
+      case "ico" -> {
+        return enemy(filePath); // image/ico.ksy
+      }
+      case "png" -> {
+        return enemy(filePath); // image/png.ksy
+      }
+      case "jpg", "jpeg" -> {
+        return enemy(filePath); // image/jpeg.ksy
+      }
       //case "tif", "tiff" -> System.out.println("tif");
       //case "svg" -> System.out.println("svg");
       //case "webp" -> System.out.println("webp");
 
       // Audio - Combat
-      case "mid", "midi", "smf" -> System.out.println("midi"); // media/standard_midi_file.ksy
-      case "ogg" -> System.out.println("ogg"); // media/ogg.ksy
+      case "mid", "midi", "smf" -> {
+        return enemy(filePath); // media/standard_midi_file.ksy
+      }
+      case "ogg" -> {
+        return enemy(filePath); // media/ogg.ksy
+      }
       //case "wav" -> System.out.println("wav"); // media/wav.ksy Java class seems to have some issues
       //case "mp3" -> System.out.println("mp3");
 
       // Video - Combat
-      case "avi" -> System.out.println("avi"); //avi.ksy
+      case "avi" -> {
+        return enemy(filePath); //avi.ksy
+      }
       //case "webm" -> System.out.println("webm");
       //case "mkv" -> System.out.println("mkv");
 

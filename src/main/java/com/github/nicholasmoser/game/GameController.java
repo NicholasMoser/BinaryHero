@@ -77,7 +77,8 @@ public class GameController {
     int currHealth = state.getCurrHealth();
     int totalHealth = state.getTotalHealth();
     int power = state.getPower();
-    String status = String.format("Health: %d / %d Power: %d", currHealth, totalHealth, power);
+    int gold = state.getGold();
+    String status = String.format("Health: %d / %d Power: %d Gold: %d", currHealth, totalHealth, power, gold);
     characterStatus.setText(status);
   }
 
