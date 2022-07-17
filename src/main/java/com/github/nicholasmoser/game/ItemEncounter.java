@@ -9,12 +9,12 @@ import javafx.scene.control.ListView;
 public class ItemEncounter implements Encounter {
 
   private final Item item;
-  private final int amount;
+  private final boolean endGame;
   private State state;
 
-  public ItemEncounter(Item item, int amount) {
+  public ItemEncounter(Item item, boolean endGame) {
     this.item = item;
-    this.amount = amount;
+    this.endGame = endGame;
   }
 
   @Override
@@ -23,28 +23,30 @@ public class ItemEncounter implements Encounter {
   }
 
   @Override
-  public List<String> getEntryMessages() {
+  public List<String> getEntryMessages(int roll) {
+    int base = endGame ? 5 : 50;
+    base += ((roll - 3) * 2);
     List<String> messages = new ArrayList<>();
     switch(item) {
       case POTION -> {
         messages.add("You find and drink a potion!");
-        messages.add("You heal " + amount + " health.");
-        state.addHealth(amount);
+        messages.add("You heal " + base + " health.");
+        state.addHealth(base);
       }
       case POISON -> {
         messages.add("You find and drink poison...");
-        messages.add("You lose " + amount + " health.");
-        state.removeHealth(amount);
+        messages.add("You lose " + base + " health.");
+        state.removeHealth(base);
       }
       case BIGGER_SWORD -> {
         messages.add("You find a bigger sword!");
-        messages.add("You gain " + amount + " power.");
-        state.addPower(amount);
+        messages.add("You gain " + base + " power.");
+        state.addPower(base);
       }
       case SWORD_BREAKS -> {
         messages.add("Your sword breaks and now you have to use a smaller sword...");
-        messages.add("You lose " + amount + " power.");
-        state.removePower(amount);
+        messages.add("You lose " + base + " power.");
+        state.removePower(base);
       }
     }
     return messages;

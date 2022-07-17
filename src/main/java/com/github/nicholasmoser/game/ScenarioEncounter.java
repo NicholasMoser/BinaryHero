@@ -20,7 +20,7 @@ public class ScenarioEncounter implements Encounter {
   }
 
   @Override
-  public List<String> getEntryMessages() {
+  public List<String> getEntryMessages(int roll) {
     return null;
   }
 

@@ -8,7 +8,7 @@ public interface Encounter {
 
   void setState(State state);
 
-  List<String> getEntryMessages();
+  List<String> getEntryMessages(int roll);
 
   List<Node> getActions(ListView<String> events);
 }

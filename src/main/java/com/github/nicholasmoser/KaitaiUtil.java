@@ -3,8 +3,6 @@ package com.github.nicholasmoser;
 import com.github.nicholasmoser.game.Encounter;
 import com.github.nicholasmoser.game.Item;
 import com.github.nicholasmoser.game.ItemEncounter;
-import com.github.nicholasmoser.kaitai.MicrosoftPe;
-import com.github.nicholasmoser.kaitai.MicrosoftPe.Section;
 import com.google.common.io.Files;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -84,10 +82,21 @@ public class KaitaiUtil {
   }
 
   private static Encounter parseMicrosoftPe(Path filePath) throws IOException {
-    MicrosoftPe bin = MicrosoftPe.fromFile(filePath.toString());
-    for (Section section : bin.pe().sections()) {
-
+    int hash = CRC32.getHash(filePath);
+    if (hash % 4 == 0) {
+      return new ItemEncounter(Item.POTION, isEndGame(filePath));
+    } else if (hash % 4 == 1) {
+      return new ItemEncounter(Item.POISON, isEndGame(filePath));
+    } else if (hash % 4 == 2) {
+      return new ItemEncounter(Item.BIGGER_SWORD, isEndGame(filePath));
+    } else {
+      return new ItemEncounter(Item.SWORD_BREAKS, isEndGame(filePath));
     }
-    return new ItemEncounter(Item.POTION, 5);
   }
+
+  private static boolean isEndGame(Path filePath) {
+    return !filePath.toString().contains(":\\Windows");
+  }
+
+
 }

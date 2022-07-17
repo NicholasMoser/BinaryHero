@@ -25,7 +25,13 @@ public class EncounterController {
   public void init(State state, Encounter encounter) {
     this.state = state;
     this.encounter = encounter;
-    events.getItems().addAll(encounter.getEntryMessages());
+    int roll = roll();
+    Image rollImage = GUIUtils.getRollImage(roll);
+    ImageView view = new ImageView(rollImage);
+    view.setFitHeight(64);
+    view.setFitWidth(64);
+    icons.getChildren().add(view);
+    events.getItems().addAll(encounter.getEntryMessages(roll));
     events.setStyle(EVENT_FONT_SIZE);
     actionBar.getChildren().addAll(encounter.getActions(events));
     Button exit = new Button("Exit");
@@ -36,12 +42,6 @@ public class EncounterController {
     });
     actionBar.getChildren().add(exit);
     updateCharacterStatus();
-    int roll = roll();
-    Image rollImage = GUIUtils.getRollImage(roll);
-    ImageView view = new ImageView(rollImage);
-    view.setFitHeight(64);
-    view.setFitWidth(64);
-    icons.getChildren().add(view);
   }
 
   private void updateCharacterStatus() {

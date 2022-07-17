@@ -10,6 +10,7 @@ public class State {
   private int totalHealth;
   private int currHealth;
   private int power;
+  private boolean isDead;
 
   public State(Path currentDirectory) {
     this.totalHealth = 100;
@@ -17,6 +18,7 @@ public class State {
     this.power = 5;
     this.currentDirectory = currentDirectory;
     this.completedPaths = new HashSet<>();
+    this.isDead = false;
   }
 
   public boolean hasCompleted(Path path) {
@@ -39,24 +41,38 @@ public class State {
     return totalHealth;
   }
 
-  public int addTotalHealth(int amount) {
-    return totalHealth += amount;
+  public void addTotalHealth(int amount) {
+    currHealth += amount;
+    totalHealth += amount;
   }
 
-  public int removeTotalHealth(int amount) {
-    return totalHealth -= amount;
+  public void removeTotalHealth(int amount) {
+    totalHealth -= amount;
+    if (currHealth > totalHealth) {
+      currHealth = totalHealth;
+    }
   }
 
   public int getCurrHealth() {
     return currHealth;
   }
 
-  public int addHealth(int amount) {
-    return currHealth += amount;
+  public void addHealth(int amount) {
+    currHealth += amount;
+    if (currHealth > totalHealth) {
+      currHealth = totalHealth;
+    }
   }
 
-  public int removeHealth(int amount) {
-    return currHealth -= amount;
+  public void removeHealth(int amount) {
+    currHealth -= amount;
+    if (currHealth <= 0) {
+      isDead = true;
+    }
+  }
+
+  public boolean isDead() {
+    return isDead;
   }
 
   public int getPower() {
