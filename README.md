@@ -12,6 +12,9 @@ let you plug in any Sega Genesis game and get a unique [Blue Sphere](https://son
 stage. It was further inspired by games like [AudioSurf](https://www.audio-surf.com/) which
 generate a unique level based on the music track.
 
+Doors are folders that lead to new encounters. Locked doors are files and folders that are
+inaccessible by the game.
+
 Many file types are recognized by Binary Hero, and the characteristics of the possible encounters
 will be tailored to the characteristics of the file. For example, particularly large image
 files will yield harder encounters with greater prizes. Every player of this game should
@@ -22,6 +25,9 @@ have an experience unique to their computer!
 The idea of the game is that there are many paths in your file system you can explore. Users may
 also create their own groups of files to create unique repeatable dungeons that others can play.
 New file types and more advanced RPG mechanics would be added over time.
+
+The end-game can be found in your Windows folder (e.g. C:/Windows). Encounters in this folder
+will be **much** harder and harsher.
 
 ## Ideas
 

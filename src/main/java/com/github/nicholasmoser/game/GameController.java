@@ -1,5 +1,6 @@
 package com.github.nicholasmoser.game;
 
+import com.github.nicholasmoser.KaitaiUtil;
 import com.github.nicholasmoser.Message;
 import com.github.nicholasmoser.gui.GUIUtils;
 import java.io.IOException;
@@ -10,12 +11,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GameController {
 
@@ -150,11 +160,11 @@ public class GameController {
     return button;
   }
 
-  public Button getFileImage(Path path) {
+  private Button getFileImage(Path path) {
     String extension = com.google.common.io.Files.getFileExtension(path.toString()).toLowerCase(
         Locale.ROOT);
     String image;
-    switch(extension) {
+    switch (extension) {
       case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore", "properties",
           "settings", "config", "conf", "lua", "go", "c++", "java", "bat", "sh", "ps1", "php",
           "c", "js", "h", "cs", "py", "cpp", "css" -> image = "papyrus.png";
@@ -173,12 +183,38 @@ public class GameController {
       button.setDisable(true);
     } else {
       button.setOnAction(action -> {
-            //KaitaiUtil.readFile(path);
+            try {
+              handleEncounter(path);
+            } catch (Exception e) {
+              LOGGER.log(Level.SEVERE, "Failed to Read File", e);
+              Message.error("Failed to Read File", e.getMessage());
+            }
             state.addCompleted(path);
             button.setDisable(true);
           }
       );
     }
     return button;
+  }
+
+  private void handleEncounter(Path path) throws IOException {
+    Encounter encounter = KaitaiUtil.readFile(path);
+    encounter.setState(state);
+    Stage stage = new Stage();
+    try {
+      FXMLLoader loader = new FXMLLoader(GameController.class.getResource("encounter.fxml"));
+      Scene scene = new Scene(loader.load());
+      GUIUtils.initDarkMode(scene);
+      EncounterController controller = loader.getController();
+      controller.init(state, encounter);
+      GUIUtils.setIcons(stage);
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setScene(scene);
+      stage.setTitle("Encounter");
+      stage.centerOnScreen();
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

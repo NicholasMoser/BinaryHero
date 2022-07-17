@@ -1,6 +1,8 @@
 package com.github.nicholasmoser;
 
 import com.github.nicholasmoser.game.Encounter;
+import com.github.nicholasmoser.game.Item;
+import com.github.nicholasmoser.game.ItemEncounter;
 import com.github.nicholasmoser.kaitai.MicrosoftPe;
 import com.github.nicholasmoser.kaitai.MicrosoftPe.Section;
 import com.google.common.io.Files;
@@ -83,9 +85,9 @@ public class KaitaiUtil {
 
   private static Encounter parseMicrosoftPe(Path filePath) throws IOException {
     MicrosoftPe bin = MicrosoftPe.fromFile(filePath.toString());
-    for (Section section : bin._root().pe().sections()) {
+    for (Section section : bin.pe().sections()) {
 
     }
-    return null;
+    return new ItemEncounter(Item.POTION);
   }
 }
