@@ -160,11 +160,9 @@ public class GameController {
         Locale.ROOT);
     String image;
     switch (extension) {
-      case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore", "properties",
-          "settings", "config", "conf", "lua", "go", "c++", "java", "bat", "sh", "ps1", "php",
-          "c", "js", "h", "cs", "py", "cpp", "css" -> image = "papyrus.png";
-      case "class", "exe", "dll", "sys" -> image = "item.png";
-      case "bmp", "gif", "ico", "png", "jpg", "jpeg", "mid", "midi", "smf", "ogg", "avi" -> image = "swords.png";
+      case "json", "_json", "xml", "vcxproj", "csproj", "html", "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore", "xaml", "properties", "settings", "config", "conf", "lua", "go", "c++", "java", "bat", "cmd", "sh", "ps1", "php", "c", "js", "h", "cs", "py", "cpp", "css" -> image = "papyrus.png";
+      case "class", "exe", "dll", "sys", "elf" -> image = "item.png";
+      case "bmp", "gif", "ico", "png", "jpg", "jpeg", "tif", "tiff", "svg", "webp", "mid", "midi", "smf", "wav", "ogg", "mp3", "avi", "webm", "mkv", "mp4" -> image = "swords.png";
       default -> image = "question_mark.png";
     }
     Button button = new Button();

@@ -21,9 +21,14 @@ generate a unique level based on the music track.
 Simply use your mouse or keyboard to interact with the icons to explore.
 
 The main objective is to become as strong as possible and accumulate as much gold as possible.
-Doors are folders that lead to new encounters. Locked doors are files and folders that are
-inaccessible by the game. Papyrus is a non-combat scenario. Swords are combat. Potions are items.
-Question marks are random encounters.
+Here's a description of the different encounters you may see:
+
+- **Doors** - Doors simply are folders/directories. Clicking on one enters that folder/directory.
+- **Locked Doors** - Folders/directories or files that are inaccessible by the game.
+- **Paper** - Source code, text, or structured text files. These encounters are non-combat scenarios.
+- **Swords** - Image, audio, or video files. These encounters are combat scenarios.
+- **Potion** - Executable files. These encounters are items that you find.
+- **Question Mark** - All other files. These encounters are random.
 
 The end-game can be found in your Windows folder (e.g. C:/Windows). Encounters in this folder
 will be **much** harder but with higher rewards.

@@ -17,32 +17,19 @@ public class KaitaiUtil {
   public static Encounter readFile(Path filePath) throws IOException {
     String extension = Files.getFileExtension(filePath.toString()).toLowerCase(Locale.ROOT);
     switch (extension) {
-      // Structured Text
-      //case "json", "_json" -> System.out.println("json");
-      //case "xml", "vcxproj", "csproj", "html" -> System.out.println("xml");
-      //case "xaml" -> System.out.println("xaml");
+      // Structured Text - Description Encounters
+      case "json", "_json", "xml", "vcxproj", "csproj", "html", "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore", "xaml", "properties", "settings", "config", "conf", "lua", "go", "c++", "java", "bat", "cmd", "sh", "ps1", "php", "c", "js", "h", "cs", "py", "cpp", "css" -> {
+        return scenario(filePath);
+      }
 
       // Text - Description Encounters
-      case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore" -> {
-        return scenario(filePath);
-      }
-      case "properties", "settings", "config", "conf" -> {
-        return scenario(filePath);
-      }
-      case "lua", "go", "c++", "java", "bat", "sh", "ps1", "php", "c", "js", "h", "cs", "py", "cpp", "css" -> {
-        return scenario(filePath);
-      }
 
       // Executable - Items
-      case "class" -> {
+      case "class", "exe", "dll", "sys", "elf" -> {
         return item(filePath); // executable/class.ksy
       }
-      case "exe", "dll", "sys" -> {
-        return item(filePath); // executable/microsoft_pe.ksy
-      }
-      case "elf" -> {
-        return item(filePath); // executable/elf.ksy
-      }
+      // executable/microsoft_pe.ksy
+      // executable/elf.ksy
 
       // Archive - Challenge
       // TODO
@@ -58,49 +45,29 @@ public class KaitaiUtil {
       //case "doc" -> System.out.println("doc");
 
       // Image - Combat
-      case "bmp" -> {
+      case "bmp", "gif", "ico", "png", "jpg", "jpeg", "tif", "tiff", "svg", "webp", "mid", "midi", "smf", "wav", "ogg", "mp3", "avi", "webm", "mkv", "mp4" -> {
         return enemy(filePath); // image/bmp.ksy
       }
-      case "gif" -> {
-        return enemy(filePath); // image/gif.ksy
-      }
-      case "ico" -> {
-        return enemy(filePath); // image/ico.ksy
-      }
-      case "png" -> {
-        return enemy(filePath); // image/png.ksy
-      }
-      case "jpg", "jpeg" -> {
-        return enemy(filePath); // image/jpeg.ksy
-      }
-      //case "tif", "tiff" -> System.out.println("tif");
-      //case "svg" -> System.out.println("svg");
-      //case "webp" -> System.out.println("webp");
+      // image/gif.ksy
+      // image/ico.ksy
+      // image/png.ksy
+      // image/jpeg.ksy
 
       // Audio - Combat
-      case "mid", "midi", "smf" -> {
-        return enemy(filePath); // media/standard_midi_file.ksy
-      }
-      case "ogg" -> {
-        return enemy(filePath); // media/ogg.ksy
-      }
-      //case "wav" -> System.out.println("wav"); // media/wav.ksy Java class seems to have some issues
-      //case "mp3" -> System.out.println("mp3");
+      // media/standard_midi_file.ksy
+      // media/ogg.ksy
+      // media/wav.ksy Java class seems to have some issues
 
       // Video - Combat
-      case "avi" -> {
-        return enemy(filePath); //avi.ksy
-      }
-      //case "webm" -> System.out.println("webm");
-      //case "mkv" -> System.out.println("mkv");
+      //avi.ksy
 
       // Other - Random
-      case "ttf" -> {
-        return random(filePath); // font/ttf.ksy
-      }
-      case "res" -> {
-        return random(filePath); // windows/windows_resource_file.ksy
-      }
+      //case "ttf" -> {
+      //  return random(filePath); // font/ttf.ksy
+      //}
+      //case "res" -> {
+      //  return random(filePath); // windows/windows_resource_file.ksy
+      //}
       //case "torrent" -> System.out.println("torrent");
       //case "iso" -> System.out.println("iso");
       //case "mui" -> System.out.println("mui");
