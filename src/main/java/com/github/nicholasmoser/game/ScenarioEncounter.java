@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 
 public class ScenarioEncounter implements Encounter {
 
@@ -27,5 +28,10 @@ public class ScenarioEncounter implements Encounter {
   @Override
   public List<Node> getActions(ListView<String> events) {
     return Collections.emptyList();
+  }
+
+  @Override
+  public Image getImage() {
+    return null;
   }
 }

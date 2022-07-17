@@ -1,10 +1,12 @@
 package com.github.nicholasmoser.game;
 
+import com.github.nicholasmoser.gui.GUIUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 
 public class ItemEncounter implements Encounter {
 
@@ -55,5 +57,16 @@ public class ItemEncounter implements Encounter {
   @Override
   public List<Node> getActions(ListView<String> events) {
     return Collections.emptyList();
+  }
+
+  @Override
+  public Image getImage() {
+    if (item == Item.SWORD_BREAKS) {
+      return GUIUtils.getImage("nerf.png");
+    } else if (item == Item.BIGGER_SWORD) {
+      return GUIUtils.getImage("buff.png");
+    } else {
+      return GUIUtils.getImage("item.png");
+    }
   }
 }

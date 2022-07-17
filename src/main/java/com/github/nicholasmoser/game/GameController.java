@@ -177,6 +177,10 @@ public class GameController {
       button.setDisable(true);
     } else {
       button.setOnAction(action -> {
+            if (state.isDead()) {
+              Message.error("You Are Dead", "Oh dear, you are dead!");
+              return;
+            }
             try {
               handleEncounter(path);
             } catch (Exception e) {
@@ -192,6 +196,7 @@ public class GameController {
   }
 
   private void handleEncounter(Path path) throws IOException {
+
     Encounter encounter = KaitaiUtil.readFile(path);
     encounter.setState(state);
     Stage stage = new Stage();

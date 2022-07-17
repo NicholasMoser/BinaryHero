@@ -41,6 +41,7 @@ public class EncounterController {
       stage.close();
     });
     actionBar.getChildren().add(exit);
+    exit.requestFocus();
     updateCharacterStatus();
   }
 
