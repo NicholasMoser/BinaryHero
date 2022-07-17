@@ -1,1 +1,1 @@
-bin/GNTool.bat
+bin/BinaryHero.bat

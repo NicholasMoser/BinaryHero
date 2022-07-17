@@ -52,6 +52,7 @@ characteristics is determined by a [CRC32 hash](https://en.wikipedia.org/wiki/Cy
   to selecting the next encounter
 - Use gold for something
 - Save game
+- After visiting a door, change it to an open door so you know it has been visited
 
 ## Attribution
 

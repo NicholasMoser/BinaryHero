@@ -22,11 +22,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-/**
- * A tool that allows you to modify files in a Naruto GNT ISO file.
- * 
- * @author Nicholas Moser
- */
 public class BinaryHero extends Application {
 
   public static final File USER_HOME = new File(System.getProperty("user.home"));

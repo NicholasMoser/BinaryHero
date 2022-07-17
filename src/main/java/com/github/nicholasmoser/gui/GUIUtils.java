@@ -205,24 +205,6 @@ public class GUIUtils {
   }
 
   /**
-   * Gets a node at a specified row and column in a GridPane.
-   * https://stackoverflow.com/questions/20655024/javafx-gridpane-retrieve-specific-cell-content/20656861#20656861
-   *
-   * @param gridPane The GridPane to search.
-   * @param col The column of the node.
-   * @param row The row of the node.
-   * @return The Optional node requested.
-   */
-  public static Optional<Node> getNodeFromGridPane(GridPane gridPane, int col, int row) {
-    for (Node node : gridPane.getChildren()) {
-      if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-        return Optional.of(node);
-      }
-    }
-    return Optional.empty();
-  }
-
-  /**
    * @return If the platform this is running on is Windows.
    */
   public static boolean isWindows() {
