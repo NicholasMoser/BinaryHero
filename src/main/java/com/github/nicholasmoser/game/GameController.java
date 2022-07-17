@@ -210,6 +210,7 @@ public class GameController {
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
     stage.setTitle("Encounter");
+    stage.setResizable(false);
     stage.centerOnScreen();
     stage.show();
   }

@@ -59,6 +59,7 @@ public class BinaryHero extends Application {
     primaryStage.setScene(scene);
     primaryStage.centerOnScreen();
     primaryStage.setResizable(false);
+    primaryStage.requestFocus();
     primaryStage.show();
   }
 
@@ -69,10 +70,10 @@ public class BinaryHero extends Application {
    */
   private GridPane createButtonGrid() {
     Button start = new Button();
-    start.setText("Start");
+    start.setText("Start!");
     start.setStyle(FONT_SIZE_CSS);
     start.setTooltip(new Tooltip("Begin the game!"));
-    start.setMinSize(800, 400);
+    start.setMinSize(600, 300);
     start.setOnAction(event -> {
       Optional<Path> dir = Choosers.getStartingDirectory(USER_HOME);
       if (dir.isEmpty()) {
@@ -85,7 +86,7 @@ public class BinaryHero extends Application {
     help.setText("Help");
     help.setStyle(FONT_SIZE_CSS);
     help.setTooltip(new Tooltip("Instructions and info on the game!"));
-    help.setMinSize(800, 400);
+    help.setMinSize(600, 300);
     help.setOnAction(event -> help());
 
     GridPane buttonPane = new GridPane();
@@ -116,7 +117,7 @@ public class BinaryHero extends Application {
 
   private void help() {
     try {
-      Desktop.getDesktop().browse(new URI("https://github.com/NicholasMoser/BinaryHero#binaryhero"));
+      Desktop.getDesktop().browse(new URI("https://github.com/NicholasMoser/BinaryHero#binary-hero"));
     } catch (Exception e) {
       e.printStackTrace();
     }
