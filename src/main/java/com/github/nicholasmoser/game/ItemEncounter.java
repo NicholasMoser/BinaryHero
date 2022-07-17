@@ -31,6 +31,7 @@ public class ItemEncounter implements Encounter {
     List<String> messages = new ArrayList<>();
     switch(item) {
       case POTION -> {
+        base += 3; // there, now you gain a little more than you lose on average
         messages.add("You find and drink a potion!");
         messages.add("You heal " + base + " health.");
         state.addHealth(base);
