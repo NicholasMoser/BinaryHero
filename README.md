@@ -52,6 +52,9 @@ Icons and graphics created by **Freepik**.
   - [Item](https://www.flaticon.com/premium-icon/potion_2790362)
   - [Buff](https://www.flaticon.com/premium-icon/buff_2790394)
   - [Nerf](https://www.flaticon.com/premium-icon/nerf_2790400)
+  - [Slime](https://www.flaticon.com/premium-icon/green-slime_5980291)
+  - [Skeleton](https://www.flaticon.com/free-icon/skull_3325103)
+  - [Knight](https://www.flaticon.com/premium-icon/knight_2701795)
 - CC0-1.0, MIT, BSD-3-Clause-Attribution
   - [Kaitai Struct Formats](https://github.com/kaitai-io/kaitai_struct_formats)
 - CC0 License

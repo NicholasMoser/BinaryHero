@@ -1,5 +1,6 @@
 package com.github.nicholasmoser.game;
 
+import com.github.nicholasmoser.gui.GUIUtils;
 import java.util.Collections;
 import java.util.List;
 import javafx.scene.Node;
@@ -9,10 +10,12 @@ import javafx.scene.image.Image;
 public class EnemyEncounter implements Encounter {
 
   private final Enemy enemy;
+  private final boolean endGame;
   private State state;
 
-  public EnemyEncounter(Enemy enemy) {
+  public EnemyEncounter(Enemy enemy, boolean endGame) {
     this.enemy = enemy;
+    this.endGame = endGame;
   }
 
   @Override
@@ -32,6 +35,14 @@ public class EnemyEncounter implements Encounter {
 
   @Override
   public Image getImage() {
-    return null;
+    if (enemy == Enemy.DRAGON) {
+      return GUIUtils.getImage("final-boss.png");
+    } else if (enemy == Enemy.KNIGHT) {
+      return GUIUtils.getImage("knight.png");
+    } else if (enemy == Enemy.SKELETON) {
+      return GUIUtils.getImage("skeleton.png");
+    } else {
+      return GUIUtils.getImage("slime.png");
+    }
   }
 }

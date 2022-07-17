@@ -1,8 +1,12 @@
 package com.github.nicholasmoser;
 
 import com.github.nicholasmoser.game.Encounter;
+import com.github.nicholasmoser.game.Enemy;
+import com.github.nicholasmoser.game.EnemyEncounter;
 import com.github.nicholasmoser.game.Item;
 import com.github.nicholasmoser.game.ItemEncounter;
+import com.github.nicholasmoser.game.Scenario;
+import com.github.nicholasmoser.game.ScenarioEncounter;
 import com.google.common.io.Files;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -20,16 +24,26 @@ public class KaitaiUtil {
       //case "xaml" -> System.out.println("xaml");
 
       // Text - Description Encounters
-      case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore" -> System.out.println("text");
-      case "properties", "settings", "config", "conf" -> System.out.println("probably text");
-      case "lua", "go", "c++", "java", "bat", "sh", "ps1", "php", "c", "js", "h", "cs", "py", "cpp", "css" -> System.out.println("code");
+      case "txt", "log", "md5", "gitconfig", "gradle", "sha512", "gitignore" -> {
+        return scenario(filePath);
+      }
+      case "properties", "settings", "config", "conf" -> {
+        return scenario(filePath);
+      }
+      case "lua", "go", "c++", "java", "bat", "sh", "ps1", "php", "c", "js", "h", "cs", "py", "cpp", "css" -> {
+        return scenario(filePath);
+      }
 
       // Executable - Items
-      case "class" -> System.out.println("class"); // executable/class.ksy
-      case "exe", "dll", "sys" -> {
-        return parseMicrosoftPe(filePath); // executable/microsoft_pe.ksy
+      case "class" -> {
+        return item(filePath); // executable/class.ksy
       }
-      case "elf" -> System.out.println("elf"); // executable/elf.ksy
+      case "exe", "dll", "sys" -> {
+        return item(filePath); // executable/microsoft_pe.ksy
+      }
+      case "elf" -> {
+        return item(filePath); // executable/elf.ksy
+      }
 
       // Archive - Challenge
       // TODO
@@ -81,7 +95,31 @@ public class KaitaiUtil {
     return null;
   }
 
-  private static Encounter parseMicrosoftPe(Path filePath) throws IOException {
+  private static Encounter scenario(Path filePath) throws IOException {
+    int hash = CRC32.getHash(filePath);
+    if (hash % 3 == 0) {
+      return new ScenarioEncounter(Scenario.NOTHING, isEndGame(filePath));
+    } else if (hash % 3 == 1) {
+      return new ScenarioEncounter(Scenario.INJURY, isEndGame(filePath));
+    } else {
+      return new ScenarioEncounter(Scenario.TRAINING, isEndGame(filePath));
+    }
+  }
+
+  private static Encounter enemy(Path filePath) throws IOException {
+    int hash = CRC32.getHash(filePath);
+    if (hash % 4 == 0) {
+      return new EnemyEncounter(Enemy.SLIME, isEndGame(filePath));
+    } else if (hash % 4 == 1) {
+      return new EnemyEncounter(Enemy.SKELETON, isEndGame(filePath));
+    } else if (hash % 4 == 2) {
+      return new EnemyEncounter(Enemy.KNIGHT, isEndGame(filePath));
+    } else {
+      return new EnemyEncounter(Enemy.DRAGON, isEndGame(filePath));
+    }
+  }
+
+  private static Encounter item(Path filePath) throws IOException {
     int hash = CRC32.getHash(filePath);
     if (hash % 4 == 0) {
       return new ItemEncounter(Item.POTION, isEndGame(filePath));
